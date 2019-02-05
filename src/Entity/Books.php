@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,12 +44,12 @@ class Books
     private $edition;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $borrowDate;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $returnDate;
 
@@ -60,6 +62,16 @@ class Books
      * @ORM\Column(type="array", nullable=true)
      */
     private $userHistorical = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="books")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -170,6 +182,37 @@ class Books
     public function setUserHistorical(?array $userHistorical): self
     {
         $this->userHistorical = $userHistorical;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Users[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(Users $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setBooks($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getBooks() === $this) {
+                $user->setBooks(null);
+            }
+        }
 
         return $this;
     }

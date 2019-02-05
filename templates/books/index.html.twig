@@ -5,6 +5,8 @@
 {% block body %}
     <div class="d-flex justify-content-center">
     <h1 class="m-5">La liste des livres</h1>
+    <a class="mt-5" href="{{ path('books_index') }}">Retour à la liste des livres</a>    
+    <a class="m-5" href="{{ path('users_index') }}">Retour à la liste des utilisateurs</a>
     <a class="btn btn-success m-5 float-right" href="{{ path('books_new') }}">Ajouter un nouveau</a>
     </div>
 
@@ -30,6 +32,7 @@
                 <td>
                     <a class="btn btn-primary" href="{{ path('books_show', {'id': book.id}) }}">Détail</a>
                     <a class="btn btn-secondary" href="{{ path('books_edit', {'id': book.id}) }}">Modifier</a>
+                    <button class="btn btn-danger mr-5">Supprimer</button> 
                 </td>
             </tr>
         {% else %}
