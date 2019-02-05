@@ -36,6 +36,11 @@ class Users
      */
     private $code;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Books", inversedBy="users")
+     */
+    private $books;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Users
     public function setCode(int $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getBooks(): ?Books
+    {
+        return $this->books;
+    }
+
+    public function setBooks(?Books $books): self
+    {
+        $this->books = $books;
 
         return $this;
     }
