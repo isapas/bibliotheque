@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les livres{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center">
+    <h1 class="m-5">La liste des livres</h1>
+    <a class="btn btn-success m-5 float-right" href="{{ path('books_new') }}">Ajouter un nouveau</a>
+    </div>
+
+    <table class="table w-75">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th scope="col" scope="row">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Category</th>
+                <th scope="col">Author</th>
+                <th scope="col">Resume</th>
+                <th scope="col">Edition</th>
+                <th scope="col">BorrowDate</th>
+                <th scope="col">ReturnDate</th>
+                <th scope="col">Status</th>
+                <th scope="col">UserHistorical</th>
+                <th scope="col">actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.resume }}</td>
+                <td>{{ book.edition ? book.edition|date('Y-m-d') : '' }}</td>
+                <td>{{ book.borrowDate ? book.borrowDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ book.returnDate ? book.returnDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ book.status }}</td>
+                <td>{{ book.userHistorical ? book.userHistorical|join(', ') : '' }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('books_show', {'id': book.id}) }}">Détail</a>
+                    <a class="btn btn-secondary" href="{{ path('books_edit', {'id': book.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
