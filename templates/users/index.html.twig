@@ -25,8 +25,8 @@
                 <td>{{ user.adress }}</td>
                 <td>{{ user.code }}</td>
                 <td>
-                    <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('users_show', {'id': user.id}) }}">Détail</a>
+                    <a href="{{ path('users_edit', {'id': user.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
