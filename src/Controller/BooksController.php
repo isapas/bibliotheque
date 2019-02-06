@@ -61,10 +61,10 @@ class BooksController extends AbstractController
         return $this->render('books/show.html.twig', [
             'book' => $book,
         ]);
-        $categoryName = $book -> getCategory () -> getCategory ();
+        // $categoryName = $book -> getCategory () -> getCategory ();
     }
 
-    /**
+    /** 
      * @Route("/{id}/edit", name="books_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Books $book): Response
