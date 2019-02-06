@@ -19,7 +19,7 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="int", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $category;
 
@@ -38,7 +38,7 @@ class Category
         return $this->id;
     }
 
-    public function getCategory(): ?int
+    public function getCategory(): ?string
     {
         return $this->category;
     }
@@ -79,5 +79,9 @@ class Category
         }
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->category;
     }
 }
