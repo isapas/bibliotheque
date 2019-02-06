@@ -20,9 +20,14 @@ class BooksController extends AbstractController
      */
     public function index(BooksRepository $booksRepository): Response
     {
+        // if () {
+
+        // }
+        // else {
         return $this->render('books/index.html.twig', [
             'books' => $booksRepository->findAll(),
         ]);
+        // }
     }
 
     /**
@@ -56,6 +61,7 @@ class BooksController extends AbstractController
         return $this->render('books/show.html.twig', [
             'book' => $book,
         ]);
+        $categoryName = $book -> getCategory () -> getCategory ();
     }
 
     /**
@@ -93,4 +99,5 @@ class BooksController extends AbstractController
 
         return $this->redirectToRoute('books_index');
     }
+    
 }
