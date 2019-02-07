@@ -10,18 +10,18 @@
     <a class="btn btn-success m-5 float-right" href="{{ path('books_new') }}">Ajouter un nouveau</a>
     </div>
         <div class="input-group w-25">
+                {# {% for category in categories|sort %}
             <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-    {#{% for book in books|sort %}
-                
-                <option value="Roman">Roman</option>
-                <option value="Documentaire">Documentaire</option>
-                <option value="3">Three</option>
-    {% endfor %}#}
-
+                <option name="{{ book.category }}">Roman</option>
+                <option value="{{ book.category }}">Documentaire</option>
+                <option value="{{ book.category }}">Three</option>
             </select>
             <div class="input-group-append">
                 <input class="btn btn-primary" type="submit" value="Ok">
             </div>
+
+        {% endfor %}
+ #}
         </div>
 
 
@@ -41,7 +41,7 @@
             <tr>
                 <td>{{ book.id }}</td>
                 <td>{{ book.title }}</td>
-                <td>{{ book.category }}</td>
+                <td>{{ book.category.category }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.status }}</td>
                 <td>
