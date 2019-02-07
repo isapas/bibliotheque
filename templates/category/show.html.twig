@@ -3,9 +3,10 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1>La liste des catégories</h1>
+    <a href="{{ path('books_index') }}">Retour à la liste des livres</a>
 
-    <table class="table">
+    <table class="table mb-5 d-flex justify-content-center text-left flex-wrap">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -17,10 +18,9 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('category_index') }}">back to list</a>
-
-    <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
-
+    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+        <a href="{{ path('category_index') }}">back to list</a>
+        <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
+    </div>
     {{ include('category/_delete_form.html.twig') }}
 {% endblock %}
