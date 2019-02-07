@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Books;
+use App\Entity\Category;
+use App\Form\SortType;
 use App\Form\BooksType;
 use App\Repository\BooksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,18 +18,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class BooksController extends AbstractController
 {
     /**
-     * @Route("/", name="books_index", methods={"GET"})
+     * @Route("/", name="books_index", methods={"GET", "POST"})
      */
-    public function index(BooksRepository $booksRepository): Response
+    public function index(BooksRepository $booksRepository, Request $request): Response
     {
-        // if () {
+        $form = $this->createForm(SortType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
+            dump($category);
+        }
+        else {
 
-        // }
-        // else {
+        }
         return $this->render('books/index.html.twig', [
             'books' => $booksRepository->findAll(),
+            'form' => $form->createView()
+
         ]);
-        // }
     }
 
     /**
@@ -49,7 +57,6 @@ class BooksController extends AbstractController
 
         return $this->render('books/new.html.twig', [
             'book' => $book,
-            // 'category' => category::class,
             'form' => $form->createView()
         ]);
     }
