@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Détail du livre N° {{ book.id }}</h1>
     <a href="{{ path('books_index') }}">Retour à la liste des livres</a>
-    <table class="table mb-5 d-flex justify-content-center text-left w-75">
+    <table class="col-sm-12 col-md-10 col-lg-10 table mb-5 d-flex justify-content-center text-left flex-wrap">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th>Catégorie</th>
-                <td>{{ book.category }}</td>
+                <td>{{ book.category.category }}</td>
             </tr>
             <tr>
                 <th>Auteur</th>
