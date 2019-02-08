@@ -24,6 +24,11 @@ class Books
     private $title;
 
     /**
+    *@ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="books")
+     */
+    private $category;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $author;
@@ -63,11 +68,6 @@ class Books
      */
     private $users;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="books")
-     */
-    private $category = [];
-
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -86,6 +86,18 @@ class Books
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
@@ -201,18 +213,6 @@ class Books
                 $user->setBooks(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }
