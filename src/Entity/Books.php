@@ -58,13 +58,9 @@ class Books
      */
     private $status;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $userHistorical = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Users", mappedBy="books")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="books")
      */
     private $users;
 
@@ -170,18 +166,6 @@ class Books
     public function setStatus(string $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getUserHistorical(): ?array
-    {
-        return $this->userHistorical;
-    }
-
-    public function setUserHistorical(?array $userHistorical): self
-    {
-        $this->userHistorical = $userHistorical;
 
         return $this;
     }
