@@ -24,15 +24,17 @@ class BooksController extends AbstractController
     {
         $form = $this->createForm(SortType::class);
         $form->handleRequest($request);
+        //si le form est envoyer je le stoque dans la variable
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
-            dump($category);
+            $books = $booksRepository->findByCategory($category['Category']);
         }
         else {
-
+            //
+            $books = $booksRepository->findAll();
         }
         return $this->render('books/index.html.twig', [
-            'books' => $booksRepository->findAll(),
+            'books' => $books,
             'form' => $form->createView()
 
         ]);
@@ -104,7 +106,6 @@ class BooksController extends AbstractController
             $entityManager->remove($book);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('books_index');
     }
     
