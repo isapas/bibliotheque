@@ -29,7 +29,7 @@ class BooksRepository extends ServiceEntityRepository
             ->innerJoin('b.category', 'c')
             ->addSelect('c')
             ->andWhere('c.id = :id')
-            ->setParameter('id', $category)
+            ->setParameter('id', $category->getId())
             ->orderBy('b.id', 'ASC')
             ->getQuery()
             ->getResult()
