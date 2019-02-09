@@ -25,7 +25,6 @@ class BooksType extends AbstractType
             ->add('borrowDate')
             ->add('returnDate')
             ->add('status')
-            ->add('userHistorical')
         ;
     }
 

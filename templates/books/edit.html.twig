@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1>Modifier le livre</h1>
-    <a class="mt-5" href="{{ path('books_index') }}">Retour à la liste des livres</a>
     {{ include('books/_form.html.twig', {'button_label': 'Update'}) }}
     {{ include('books/_delete_form.html.twig') }}
 {% endblock %}
