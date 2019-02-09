@@ -18,7 +18,7 @@ class BorrowType extends AbstractType
             ->add('code', EntityType::class, [
                 'class' => Users::class
             ])
-            ->add('users')
+            ->add('Valider', SubmitType::class)
         ;
     }
 
