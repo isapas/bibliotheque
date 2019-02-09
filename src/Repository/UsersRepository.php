@@ -19,21 +19,21 @@ class UsersRepository extends ServiceEntityRepository
         parent::__construct($registry, Users::class);
     }
 
-    // /**
-    //  * @return Users[] Returns an array of Users objects
-    //  */
-    // public function findByCategory(Category $category)
-    // {
-    //     return $this->createQueryBuilder('b')
-    //         ->innerJoin('u.category', 'c')
-    //         ->addSelect('c')
-    //         ->andWhere('c.id = :id')
-    //         ->setParameter('id', $category)
-    //         ->orderBy('b.id', 'ASC')
-    //         ->getQuery()
-    //         ->getResult()
-    //     ;
-    // }
+    /**
+     * @return Users[] Returns an array of Users objects
+     */
+    public function findByCode(Users $users)
+    {
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.user', 'b')
+            ->addSelect('u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $user->getId())
+            // ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 
     /*

@@ -18,11 +18,12 @@ class UsersController extends AbstractController
     /**
      * @Route("/", name="users_index", methods={"GET"})
      */
-    public function index(UsersRepository $usersRepository): Response
+    public function index(UsersRepository $usersRepository, Request $request): Response
     {
         return $this->render('users/index.html.twig', [
             'users' => $usersRepository->findAll(),
         ]);
+        $usersRepository->findByCode($users['code']);
     }
 
     /**
@@ -38,7 +39,6 @@ class UsersController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
             return $this->redirectToRoute('users_index');
         }
 

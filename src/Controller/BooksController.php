@@ -51,8 +51,8 @@ class BooksController extends AbstractController
     public function show(Request $request, Books $book): Response
     {
         $form = $this->createForm(BorrowType::class);
-        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $form->handleRequest($request);
             $data = $form->getData();
             $book->setUsers($users->getUsers(['code']));            
             $data->persist($book);
@@ -63,7 +63,7 @@ class BooksController extends AbstractController
             'form' => $form->createView(),
 
         ]);
-        damp($book);
+            damp($book);
 
     }
 
