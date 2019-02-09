@@ -32,7 +32,7 @@ class Users
     private $adress;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $code;
 
@@ -104,5 +104,8 @@ class Users
         $this->books = $books;
 
         return $this;
+    }
+    public function __toString() {
+        return $this->code;
     }
 }
