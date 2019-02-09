@@ -45,6 +45,28 @@ class BooksController extends AbstractController
         ]);
     }
 
+        /**
+     * @Route("/{id}", name="books_show", methods={"GET", "POST"})
+     */
+    public function show(Request $request, Books $book): Response
+    {
+        $form = $this->createForm(BorrowType::class);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $form->handleRequest($request);
+            $data = $form->getData();
+            $book->setUsers($users->getUsers(['code']));            
+            $data->persist($book);
+            $book->flush();
+        }
+        return $this->render('books/show.html.twig', [
+            'book' => $book,
+            'form' => $form->createView(),
+
+        ]);
+            damp($book);
+
+    }
+
     /**
      * @Route("/new", name="books_new", methods={"GET","POST"})
      */
@@ -65,26 +87,6 @@ class BooksController extends AbstractController
         return $this->render('books/new.html.twig', [
             'book' => $book,
             'form' => $form->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="books_show", methods={"GET"})
-     */
-    public function show(Request $request, Books $book): Response
-    {
-        // $form = $this->createForm(BorrowType::class);
-        // $form->handleRequest($request);
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $data = $form->getData();
-        //     $book->setUsers($users->getUsers(['code']));
-        //     $data->persist($book);
-        //     $book->flush();
-        // }
-        return $this->render('books/show.html.twig', [
-            'book' => $book,
-            // 'user' => $user,
-            // 'form' => $form->createView()
         ]);
     }
 

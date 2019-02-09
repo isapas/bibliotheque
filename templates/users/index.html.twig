@@ -1,14 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users index{% endblock %}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
     <div class="d-flex justify-content-center">
     <h1 class="m-5">La liste des utilisateurs</h1>
-    <a class="m-5" href="{{ path('users_index') }}">Retour à la liste des utilisateurs</a>
-    <a class="mt-5" href="{{ path('books_index') }}">Retour à la liste des livres</a>    
-
-    <a class="btn btn-success m-5 float-right" href="{{ path('users_new') }}">Create new</a>
+    <a class="btn btn-success m-5 float-right" href="{{ path('users_new') }}">Ajouter un nouveau</a>
     </div>
 
     <table class="table w-75">
@@ -34,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Pas de resultats trouvés</td>
             </tr>
         {% endfor %}
         </tbody>

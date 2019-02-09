@@ -14,12 +14,12 @@ class SortType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Category', EntityType::class, [
+            ->add('Categorie', EntityType::class, [
                 'class' => Category::class, 
                 'choice_label' => 'category',
                 'choice_value' => 'id'
             ])
-            ->add('submit', SubmitType::class)
+            ->add('Valider', SubmitType::class)
         ;
     }
 
