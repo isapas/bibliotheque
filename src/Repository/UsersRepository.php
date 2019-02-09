@@ -20,7 +20,7 @@ class UsersRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Users[] Returns an array of Users objects
+     * @return Books[] Returns an array of Users objects
      */
     public function findByCode(Users $users)
     {
