@@ -16,8 +16,6 @@
             <tr>
                 <th scope="col" scope="row">Id</th>
                 <th scope="col">Name</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Adress</th>
                 <th scope="col">Code</th>
                 <th scope="col">actions</th>
             </tr>
@@ -27,12 +25,11 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.name }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.adress }}</td>
                 <td>{{ user.code }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ path('users_show', {'id': user.id}) }}">Détail</a>
                     <a class="btn btn-secondary" href="{{ path('users_edit', {'id': user.id}) }}">Modifier</a>
+                    <button class="btn btn-danger mr-5">Supprimer</button> 
                 </td>
             </tr>
         {% else %}

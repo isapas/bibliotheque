@@ -37,7 +37,7 @@ class Users
     private $code;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Books", inversedBy="users")
+     * @ORM\OneToMany(targetEntity="App\Entity\Books", mappedBy="users")
      */
     private $books;
 
