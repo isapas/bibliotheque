@@ -34,7 +34,7 @@
                 <td>
                     <a class="btn btn-primary" href="{{ path('books_show', {'id': book.id}) }}">Détail</a>
                     <a class="btn btn-secondary" href="{{ path('books_edit', {'id': book.id}) }}">Modifier</a>
-                    <button class="btn btn-danger mr-5">Supprimer</button> 
+                    <div class="btn">{{ include('books/_delete_form.html.twig') }}</div>
                 </td>
             </tr>
         {% else %}

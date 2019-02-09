@@ -90,7 +90,6 @@ class UsersController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('users_index');
     }
 }
