@@ -30,7 +30,7 @@ class BooksController extends AbstractController
             {
             $category = $form->getData()["category"];
             //stocker la jointure dans la variable books
-           $books =$this-> getDoctrine()->getRepository()->findByCategory($category['Category'] = NULL);        
+            $books = $booksRepository->findByCategory($category['category'] = NULL);
         }
         else {
             
@@ -56,7 +56,6 @@ class BooksController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
             $entityManager->flush();
-
             return $this->redirectToRoute('books_index');
         }
 

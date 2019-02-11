@@ -25,11 +25,12 @@ class BooksRepository extends ServiceEntityRepository
      */
     public function findByCategory(Category $category = NULL)
     {
+        $category = NULL;
         return $this->createQueryBuilder('b')
             ->innerJoin('b.category', 'c')
             ->addSelect('c')
             ->andWhere('c.id = :id')
-            ->setParameter('id', $category->getId())
+            ->setParameter('id', $category)
             ->orderBy('b.id', 'ASC')
             ->getQuery()
             ->getResult()
