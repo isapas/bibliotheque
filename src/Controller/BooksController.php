@@ -30,8 +30,9 @@ class BooksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //stock les données rentrées dans le formulaire dans la variable $category
             $category = $form->getData();
+            dump($category);
             //stocker la jointure dans la variable books
-            $books = $booksRepository->findByCategory($category['category'] = NULL);
+            $books = $booksRepository->findByCategory($category['category']);
         }
         else {
             //si y'a rien dans le form tout les livres seront affichés
@@ -51,14 +52,16 @@ class BooksController extends AbstractController
     public function show(Request $request, Books $book): Response
     {
         $form = $this->createForm(BorrowType::class);
-        // $form->handleRequest($request);
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            //stock les données rentrées dans le formulaire dans la variable $category
+            //stock les données rentrées dans le formulaire dans la variable $data
             $data = $form->getData();
             //on appel le setter User pour pouvoir lui donner une nouvelle valeur
-            $book->setUsers($users->getUsers(['code']));            
-            $data->persist($book);
-            $book->flush();
+            // $book->setUsers(null);            
+            // $data->persist($book);
+            // $book->flush();
+            dump($data);
         }
         return $this->render('books/show.html.twig', [
             'book' => $book,
