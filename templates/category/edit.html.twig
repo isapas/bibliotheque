@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la category{% endblock %}
+
+{% block body %}
+    <h1>Modifier la category</h1>
+    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('category/_delete_form.html.twig') }}
+{% endblock %}
