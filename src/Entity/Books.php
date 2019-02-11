@@ -64,6 +64,11 @@ class Books
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $user_id;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -197,6 +202,18 @@ class Books
                 $user->setBooks(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?int $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

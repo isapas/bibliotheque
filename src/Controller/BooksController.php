@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Books;
-use App\Entity\Users;
 use App\Entity\Category;
 use App\Form\SortType;
-use App\Form\BorrowType;
 use App\Form\BooksType;
 use App\Repository\BooksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,40 +24,21 @@ class BooksController extends AbstractController
     {
         $form = $this->createForm(SortType::class);
         $form->handleRequest($request);
-        //si le form est envoyer je le stoque dans la variable $books
-        if ($form->isSubmitted() && $form->isValid()) {
-            //stock les données rentrées dans le formulaire dans la variable $category
-            $category = $form->getData();
-            //stocker la jointure dans la variable books
-            $books = $booksRepository->findByCategory($category['Category']);        }
-        else {
-            //si y'a rien dans le form tout les livres seront affichés
+        //si le form est envoyer je le stoque dans la variable
+        // if ($form->isSubmitted() && $form->isValid()) 
+            //{
+        //     $category = $form->getData();
+        //     //stocker la jointure dans la variable books
+        //    // $books = $booksRepository->findByCategory($category['Category']);        
+        // }
+        // else {
+            
             $books = $booksRepository->findAll();
-        }
-        //afficher la listes des livres trier en chargean le formulaire
+       // }
         return $this->render('books/index.html.twig', [
             'books' => $books,
             'form' => $form->createView()
 
-        ]);
-    }
-
-        /**
-     * @Route("/{id}", name="books_show", methods={"GET", "POST"})
-     */
-    public function show(Request $request, Books $book): Response
-    {
-        $form = $this->createForm(BorrowType::class);
-        // $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $book->setUsers($users->getUsers(['code']));            
-            $data->persist($book);
-            $book->flush();
-        }
-        return $this->render('books/show.html.twig', [
-            'book' => $book,
-            'form' => $form->createView(),
         ]);
     }
 
@@ -86,10 +65,21 @@ class BooksController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}", name="books_show", methods={"GET"})
+     */
+    public function show(Books $book): Response
+    {
+        return $this->render('books/show.html.twig', [
+            'book' => $book,
+        ]);
+        // $categoryName = $book -> getCategory () -> getCategory ();
+    }
+
     /** 
      * @Route("/{id}/edit", name="books_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Books $book): Response
+    public function edit(Request$request, Books $book): Response
     {
         $form = $this->createForm(BooksType::class, $book);
         $form->handleRequest($request);
