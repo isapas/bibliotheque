@@ -24,17 +24,18 @@ class BooksController extends AbstractController
     {
         $form = $this->createForm(SortType::class);
         $form->handleRequest($request);
-        //si le form est envoyer je le stoque dans la variable
-        // if ($form->isSubmitted() && $form->isValid()) 
-            //{
-        //     $category = $form->getData();
-        //     //stocker la jointure dans la variable books
-        //    // $books = $booksRepository->findByCategory($category['Category']);        
-        // }
-        // else {
+        //si le form est envoyeé je le stocke dans la variable
+        $category = NULL;
+        if ($form->isSubmitted() && $form->isValid()) 
+            {
+            $category = $form->getData()["category"];
+            //stocker la jointure dans la variable books
+           $books =$this-> getDoctrine()->getRepository()->findByCategory($category['Category'] = NULL);        
+        }
+        else {
             
             $books = $booksRepository->findAll();
-       // }
+       }
         return $this->render('books/index.html.twig', [
             'books' => $books,
             'form' => $form->createView()

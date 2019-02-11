@@ -23,7 +23,7 @@ class BooksRepository extends ServiceEntityRepository
     /**
      * @return Books[] Returns an array of Books objects
      */
-    public function findByCategory(Category $category)
+    public function findByCategory(Category $category = NULL)
     {
         return $this->createQueryBuilder('b')
             ->innerJoin('b.category', 'c')
