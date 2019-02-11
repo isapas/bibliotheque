@@ -31,7 +31,8 @@ class BooksController extends AbstractController
             //stock les données rentrées dans le formulaire dans la variable $category
             $category = $form->getData();
             //stocker la jointure dans la variable books
-            $books = $booksRepository->findByCategory($category['Category']);        }
+            $books = $booksRepository->findByCategory($category['category'] = NULL);
+        }
         else {
             //si y'a rien dans le form tout les livres seront affichés
             $books = $booksRepository->findAll();
@@ -52,7 +53,9 @@ class BooksController extends AbstractController
         $form = $this->createForm(BorrowType::class);
         // $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            //stock les données rentrées dans le formulaire dans la variable $category
             $data = $form->getData();
+            //on appel le setter User pour pouvoir lui donner une nouvelle valeur
             $book->setUsers($users->getUsers(['code']));            
             $data->persist($book);
             $book->flush();
@@ -76,7 +79,6 @@ class BooksController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
             $entityManager->flush();
-
             return $this->redirectToRoute('books_index');
         }
 

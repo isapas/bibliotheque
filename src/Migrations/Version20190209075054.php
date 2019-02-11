@@ -22,7 +22,7 @@ final class Version20190209075054 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE books ADD user_historical VARCHAR(255) DEFAULT NULL');
+        // $this->addSql('ALTER TABLE books ADD user_historical VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20190209075054 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE books DROP user_historical');
+        // $this->addSql('ALTER TABLE books DROP user_historical');
     }
 }
