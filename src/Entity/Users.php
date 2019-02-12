@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,11 @@ class Users
      * @ORM\OneToMany(targetEntity="App\Entity\Books", mappedBy="users")
      */
     private $books;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -94,17 +101,37 @@ class Users
         return $this;
     }
 
-    public function getBooks(): ?Books
+    /**
+     * @return Collection|Books[]
+     */
+    public function getBooks(): Collection
     {
         return $this->books;
     }
 
-    public function setBooks(?Books $books): self
+    public function addBook(Books $book): self
     {
-        $this->books = $books;
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->setUsers($this);
+        }
 
         return $this;
     }
+
+    public function removeBook(Books $book): self
+    {
+        if ($this->books->contains($book)) {
+            $this->books->removeElement($book);
+            // set the owning side to null (unless already changed)
+            if ($book->getUsers() === $this) {
+                $book->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function __toString() {
         return $this->code;
     }

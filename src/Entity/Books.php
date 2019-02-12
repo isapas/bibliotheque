@@ -58,16 +58,10 @@ class Books
      */
     private $status;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="books")
      */
     private $users;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -170,33 +164,14 @@ class Books
         return $this;
     }
 
-    /**
-     * @return Collection|Users[]
-     */
-    public function getUsers(): Collection
+    public function getUsers(): ?Users
     {
         return $this->users;
     }
 
-    public function addUser(Users $user): self
+    public function setUsers(?Users $users): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setBooks($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Users $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getBooks() === $this) {
-                $user->setBooks(null);
-            }
-        }
+        $this->users = $users;
 
         return $this;
     }
