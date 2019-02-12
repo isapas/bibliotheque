@@ -25,7 +25,7 @@ class UsersController extends AbstractController
         ]);
         $usersRepository->findByCode($users['code']);
     }
-
+    
     /**
      * @Route("/new", name="users_new", methods={"GET","POST"})
      */
