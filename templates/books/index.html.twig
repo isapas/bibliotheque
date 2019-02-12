@@ -20,6 +20,7 @@
                 <th scope="col">Catégorie</th>
                 <th scope="col">Auteur</th>
                 <th scope="col">Statut</th>
+                {# <th scope="col">Emprunteur</th> #}
                 <th scope="col">actions</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{{ book.category.category }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.status }}</td>
+                {# <td>{{ book.users.code }}</td> #}
                 <td>
                     <a class="btn btn-primary" href="{{ path('books_show', {'id': book.id}) }}">Détail</a>
                     <a class="btn btn-secondary" href="{{ path('books_edit', {'id': book.id}) }}">Modifier</a>
