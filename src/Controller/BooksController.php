@@ -62,6 +62,7 @@ class BooksController extends AbstractController
             $entityManager->persist($book);
             $entityManager->flush();
             return $this->redirectToRoute('books_index');
+            
         }
         return $this->render('books/new.html.twig', [
             'book' => $book,
@@ -85,8 +86,8 @@ class BooksController extends AbstractController
             // $data->persist($book);
 
             // $book->flush();
-
-            //dump($data);
+            // dump($data);
+            return $this->redirectToRoute("books_index");
         }
 
         return $this->render('books/show.html.twig', [
