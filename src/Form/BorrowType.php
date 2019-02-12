@@ -16,7 +16,7 @@ class BorrowType extends AbstractType
     {
         $builder
             ->add('code', TextType::class, [
-                'class' => Users::class
+                'attr' => ['placeholder' => "Le code d'utilisateur"], 
             ])
             ->add('Valider', SubmitType::class)
         ;

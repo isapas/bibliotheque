@@ -59,6 +59,10 @@ class Books
     private $status;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="books")
+     */
+    private $users;
 
     public function getId(): ?int
     {
@@ -161,4 +165,16 @@ class Books
         return $this;
     }
    
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): self
+    {
+        $this->users = $users;
+
+        return $this;
+    }
 }

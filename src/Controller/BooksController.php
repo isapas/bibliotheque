@@ -68,15 +68,14 @@ class BooksController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
         /**
-
      * @Route("/{id}", name="books_show", methods={"GET", "POST"})
 
      */
 
-    public function show($id, Request $request, Books $book): Response
 
+
+    public function show($id, Request $request, Books $book): Response
     {
 
         $form = $this->createForm(BorrowType::class);
