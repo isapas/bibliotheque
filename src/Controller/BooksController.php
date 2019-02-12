@@ -24,13 +24,13 @@ class BooksController extends AbstractController
     {
         $form = $this->createForm(SortType::class);
         $form->handleRequest($request);
-        //si le form est envoyeé je le stocke dans la variable
-        $category = NULL;
-        if ($form->isSubmitted() && $form->isValid()) 
-            {
-            $category = $form->getData()["category"];
+        //si le form est envoyer je le stoque dans la variable $books
+        if ($form->isSubmitted() && $form->isValid()) {
+            //stock les données rentrées dans le formulaire dans la variable $category
+            $category = $form->getData();
+            dump($category);
             //stocker la jointure dans la variable books
-            $books = $booksRepository->findByCategory($category['category'] = NULL);
+            $books = $booksRepository->findByCategory($category['category']);
         }
         else {
             
@@ -43,6 +43,32 @@ class BooksController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
+=======
+        /**
+     * @Route("/{id}", name="books_show", methods={"GET", "POST"})
+     */
+    public function show(Request $request, Books $book): Response
+    {
+        $form = $this->createForm(BorrowType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //stock les données rentrées dans le formulaire dans la variable $data
+            $data = $form->getData();
+            //on appel le setter User pour pouvoir lui donner une nouvelle valeur
+            // $book->setUsers(null);            
+            // $data->persist($book);
+            // $book->flush();
+            dump($data);
+        }
+        return $this->render('books/show.html.twig', [
+            'book' => $book,
+            'form' => $form->createView(),
+        ]);
+    }
+
+>>>>>>> master
     /**
      * @Route("/new", name="books_new", methods={"GET","POST"})
      */
