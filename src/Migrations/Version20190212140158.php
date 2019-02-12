@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190205103408 extends AbstractMigration
+final class Version20190212140158 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20190205103408 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE books (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, category VARCHAR(255) NOT NULL, author VARCHAR(255) NOT NULL, resume VARCHAR(255) NOT NULL, edition DATE NOT NULL, borrow_date DATETIME DEFAULT NULL, return_date DATETIME DEFAULT NULL, status VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE books ADD users_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE books ADD CONSTRAINT FK_4A1B2A9267B3B43D FOREIGN KEY (users_id) REFERENCES users (id)');
+        $this->addSql('CREATE INDEX IDX_4A1B2A9267B3B43D ON books (users_id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20190205103408 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE books');
+        $this->addSql('ALTER TABLE books DROP FOREIGN KEY FK_4A1B2A9267B3B43D');
+        $this->addSql('DROP INDEX IDX_4A1B2A9267B3B43D ON books');
+        $this->addSql('ALTER TABLE books DROP users_id');
     }
 }
