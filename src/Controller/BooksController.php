@@ -69,27 +69,15 @@ class BooksController extends AbstractController
         ]);
     }
         /**
-     * @Route("/{id}", name="books_show", methods={"GET", "POST"})
-
-     */
-
-
-
+         * @Route("/{id}", name="books_show", methods={"GET", "POST"})
+        */
     public function show($id, Request $request, Books $book): Response
     {
-
         $form = $this->createForm(BorrowType::class);
-
         $form->handleRequest($request);
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             //stock les données rentrées dans le formulaire dans la variable $data
-
             $data = $form->getData();
-
             //on appel le setter User pour pouvoir lui donner une nouvelle valeur
 
             // $book->setUsers(null);            
