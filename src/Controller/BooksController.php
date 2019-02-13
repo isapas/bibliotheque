@@ -75,25 +75,42 @@ class BooksController extends AbstractController
         */
     public function show($id, Request $request, Books $book): Response
     {
-       $book = $this->getDoctrine()->getRepository(Books::class)->findOneBy(['id' => $id]);
+        //récupère l'id  de l'objet Books en base de donnée qui correspond à celui récupéré par l'url
+        $book = $this->getDoctrine()->getRepository(Books::class)->findOneBy(['id' => $id]);
+        if(!$book)
+        {
+            //message
+        }
+        //instancie l'objet form
         $form = $this->createForm(BorrowType::class);
         $form->handleRequest($request);
+
         //vérification du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
-       //stock les données rentrées dans le formulaire dans la variable $data
-        $data = $form->getData();
-            
-       $repository = $this->getDoctrine()->getRepository(Users::class);
-       $borrower = $repository->findOneBy(['code' => $data['code']]);
-       dump($borrower);  
-        }
+            //stock les données rentrées dans le formulaire dans la variable $data
+                $data = $form->getData();
 
-             
-           
-        $data->persist($book);
-        $book->flush();
-        //si l'opération est réussie l'utilisateur est redirigé vers la vue des livres avec un message de succés
-         //return $this->redirectToRoute("books_index");
+            //récupère les données de l'objet users  accessibles dans books par la relation    
+            $user = $this->getDoctrine()->getRepository(Users::class)->findOneBy(['code' => $data['code']]);
+            if(!$user)
+            {
+                //message erreur
+            }
+            else{
+                //stocke dans la variable borrower l'utilisateur trouvé en bdd
+                $borrower = $user;
+                //dump($borrower);
+                //j'enregistre l'emprunt en base de données
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($book);
+                $entityManager->flush();
+                dump($book);
+                //message de succès
+            }
+            
+            //si l'opération est réussie l'utilisateur est redirigé vers la vue des livres avec un message de succés
+            //return $this->redirectToRoute("books_index");
+        }
      
         return $this->render('books/show.html.twig', [
 
@@ -101,6 +118,9 @@ class BooksController extends AbstractController
             'book' => $book
         ]);
      }
+    
+    
+  
 
     /** 
      * @Route("/{id}/edit", name="books_edit", methods={"GET","POST"})
