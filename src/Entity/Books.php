@@ -58,8 +58,19 @@ class Books
      */
     private $status;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="books")
+     */
+    private $users;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $borrower;
+
     public function getId(): ?int
-    {
+    {            
         return $this->id;
     }
 
@@ -71,7 +82,6 @@ class Books
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -83,7 +93,6 @@ class Books
     public function setCategory(Category $category): self
     {
         $this->category = $category;
-
         return $this;
     }
 
@@ -95,7 +104,6 @@ class Books
     public function setAuthor(string $author): self
     {
         $this->author = $author;
-
         return $this;
     }
 
@@ -107,7 +115,6 @@ class Books
     public function setResume(string $resume): self
     {
         $this->resume = $resume;
-
         return $this;
     }
 
@@ -119,7 +126,6 @@ class Books
     public function setEdition(\DateTimeInterface $edition): self
     {
         $this->edition = $edition;
-
         return $this;
     }
 
@@ -131,7 +137,6 @@ class Books
     public function setBorrowDate(?\DateTimeInterface $borrowDate): self
     {
         $this->borrowDate = $borrowDate;
-
         return $this;
     }
 
@@ -143,7 +148,6 @@ class Books
     public function setReturnDate(?\DateTimeInterface $returnDate): self
     {
         $this->returnDate = $returnDate;
-
         return $this;
     }
 
@@ -155,7 +159,29 @@ class Books
     public function setStatus(string $status): self
     {
         $this->status = $status;
+        return $this;
+    }
+   
 
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): self
+    {
+        $this->users = $users;
+        return $this;
+    }
+
+    public function getBorrower(): ?string
+    {
+        return $this->borrower;
+    }
+
+    public function setBorrower(?string $borrower): self
+    {
+        $this->borrower = $borrower;
         return $this;
     }
 }

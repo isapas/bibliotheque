@@ -18,7 +18,7 @@ class BorrowType extends AbstractType
             ->add('code', TextType::class, [
                 'attr' => ['placeholder' => "Le code d'utilisateur"], 
             ])
-            ->add('Valider', SubmitType::class)
+            ->add('Emprunter', SubmitType::class)
         ;
     }
 
