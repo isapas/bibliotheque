@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190212140158 extends AbstractMigration
+final class Version20190213191755 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,7 @@ final class Version20190212140158 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE books ADD users_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE books ADD CONSTRAINT FK_4A1B2A9267B3B43D FOREIGN KEY (users_id) REFERENCES users (id)');
-        $this->addSql('CREATE INDEX IDX_4A1B2A9267B3B43D ON books (users_id)');
+        $this->addSql('DROP TABLE employees');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +30,6 @@ final class Version20190212140158 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE books DROP FOREIGN KEY FK_4A1B2A9267B3B43D');
-        $this->addSql('DROP INDEX IDX_4A1B2A9267B3B43D ON books');
-        $this->addSql('ALTER TABLE books DROP users_id');
+        $this->addSql('CREATE TABLE employees (id INT AUTO_INCREMENT NOT NULL, firstname VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, name VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, post VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, password VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB COMMENT = \'\' ');
     }
 }

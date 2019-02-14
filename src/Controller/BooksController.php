@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/books")
@@ -31,19 +32,20 @@ class BooksController extends AbstractController
     {
         $form = $this->createForm(SortType::class);
         $form->handleRequest($request);
-        //si le form est envoyer je le stoque dans la variable $books
+        //si le form est envoyé je le stock dans la variable $books
         if ($form->isSubmitted() && $form->isValid()) {
-            //stock les données rentrées dans le formulaire dans la variable $category
+            //stocke les données rentrées dans le formulaire dans la variable $category
             $category = $form->getData();
             //dump($category);
-            //stocker la jointure dans la variable books
+            //stocker sans $books la catégorie correspondante de la table categorie
             $books = $booksRepository->findByCategory($category['category']);
         }
         else {
             //si y'a rien dans le form tout les livres seront affichés
             $books = $booksRepository->findAll();
+        
         }
-        //afficher la listes des livres trier en chargean le formulaire
+        //afficher la listes des livres trier en chargeant le formulaire
         return $this->render('books/index.html.twig', [
             'books' => $books,
             'form' => $form->createView()
@@ -77,6 +79,7 @@ class BooksController extends AbstractController
     {
         //récupère l'id  de l'objet Books en base de donnée qui correspond à celui récupéré par l'url
         $book = $this->getDoctrine()->getRepository(Books::class)->findOneBy(['id' => $id]);
+        //dump($book);
         if(!$book)
         {
             //message
@@ -89,23 +92,26 @@ class BooksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //stock les données rentrées dans le formulaire dans la variable $data
                 $data = $form->getData();
-
+            //dump($data);
             //récupère les données de l'objet users  accessibles dans books par la relation    
             $user = $this->getDoctrine()->getRepository(Users::class)->findOneBy(['code' => $data['code']]);
+            //dump($user);
             if(!$user)
             {
-                //message erreur
+                //message erreur ('Cet utilisateur n'existe pas)
             }
             else{
                 //stocke dans la variable borrower l'utilisateur trouvé en bdd
                 $borrower = $user;
-                //dump($borrower);
+                $book->setBorrower($user);
+                //$Book->setBorrowDate();
+                dump($borrower);
                 //j'enregistre l'emprunt en base de données
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($book);
                 $entityManager->flush();
                 dump($book);
-                //message de succès
+                //message de succès ('votre emprunt a bien été enrgistré')
             }
             
             //si l'opération est réussie l'utilisateur est redirigé vers la vue des livres avec un message de succés
