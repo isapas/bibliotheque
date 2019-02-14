@@ -109,15 +109,15 @@ class BooksController extends AbstractController
             }
             else{
                 //stocke dans la variable borrower l'utilisateur trouvé en bdd
-                $borrower = $user;
-                $book->setBorrower($user);
+                
+                $book->setUsers($user);
                 //$Book->setBorrowDate();
-                dump($borrower);
+                dump($user);
                 //j'enregistre l'emprunt en base de données
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($book);
                 $entityManager->flush();
-                dump($book);
+                //dump($book);
                 //message de succès ('votre emprunt a bien été enrgistré')
             }
             
