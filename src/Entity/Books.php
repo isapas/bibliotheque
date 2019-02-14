@@ -64,11 +64,6 @@ class Books
      */
     private $users;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $borrower;
-
     public function getId(): ?int
     {            
         return $this->id;
@@ -171,17 +166,6 @@ class Books
     public function setUsers(?Users $users): self
     {
         $this->users = $users;
-        return $this;
-    }
-
-    public function getBorrower(): ?string
-    {
-        return $this->borrower;
-    }
-
-    public function setBorrower(?string $borrower): self
-    {
-        $this->borrower = $borrower;
         return $this;
     }
 
