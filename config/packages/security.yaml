@@ -3,7 +3,6 @@ security:
         App\Entity\Users:
             algorithm : bcrypt
             cost : 12
-        # ROLE_SUPER_ADMIN : [ ROLE_ADMIN , ROLE_ALLOWED_TO_SWITCH ]
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -17,7 +16,9 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
-
+    # internal name - can be anything
+        # your_custom_user_provider:
+        #     id: App\Security\UserProvider
             # activate different ways to authenticate
 
             # http_basic: true
