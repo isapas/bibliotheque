@@ -18,6 +18,7 @@
                     <h5><a class="nav-item nav-link bg-primary text-white" href="{{ path('users_index') }}">Utilisateurs</a></h5>
                     <h5><a class="nav-item nav-link bg-primary text-white" href="{{ path('category_index') }}">Catégories</a></h5>            
                 </nav>
+            <a class="btn btn-danger text-white ml-5 my-4" href="{{ path('app_logout') }}">Déconnexion</a>
         </header>
 
         {% block body %}{% endblock %}

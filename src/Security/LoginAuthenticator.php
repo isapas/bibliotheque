@@ -76,13 +76,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         return $user;
     }
 
-    // public function checkCredentials($credentials, UserInterface $user)
-    // {
-    //     // Check the user's password or other credentials and return true or false
-    //     // If there are no credentials to check, you can just return true
-    //     throw new \Exception('TODO: check the credentials inside '.__FILE__);
-    // }
-
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
@@ -94,19 +87,8 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('list_liste'));
+        return new RedirectResponse($this->urlGenerator->generate('books_index'));
     }
-
-
-    // public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
-    // {
-    //     if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-    //         return new RedirectResponse($targetPath);
-    //     }
-
-    //     // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-    //     throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-    // }
 
     protected function getLoginUrl()
     {
