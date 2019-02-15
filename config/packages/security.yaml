@@ -19,8 +19,10 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
+            logout:
+                path: app_logout
 
-                    # activate different ways to authenticate
+            # activate different ways to authenticate
 
             # http_basic: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
